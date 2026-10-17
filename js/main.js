@@ -692,6 +692,10 @@ class TerraAquaGame {
       this.sound.playClick();
       document.getElementById('help-modal').classList.remove('hidden');
     });
+    document.getElementById('btn-argon-badge')?.addEventListener('click', () => {
+      this.sound.playClick();
+      document.getElementById('help-modal').classList.remove('hidden');
+    });
     document.getElementById('btn-close-help').addEventListener('click', () => {
       document.getElementById('help-modal').classList.add('hidden');
     });

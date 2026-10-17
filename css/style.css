@@ -1,20 +1,21 @@
 :root {
-  --bg-abyss: #030812;
-  --glass-bg: rgba(7, 20, 38, 0.78);
-  --glass-bg-strong: rgba(5, 15, 30, 0.92);
-  --glass-border: rgba(56, 189, 248, 0.26);
-  --glass-border-bright: rgba(0, 242, 254, 0.65);
+  --bg-abyss: #060711;
+  --glass-bg: rgba(13, 15, 34, 0.80);
+  --glass-bg-strong: rgba(10, 12, 28, 0.94);
+  --glass-border: rgba(139, 92, 246, 0.34);
+  --glass-border-bright: rgba(168, 85, 247, 0.72);
 
-  --cyan: #00f2fe;
-  --sky: #38bdf8;
+  --cyan: #60a5fa;
+  --sky: #818cf8;
   --emerald: #34d399;
-  --amber: #fbbf24;
+  --amber: #f472b6;
   --purple: #c084fc;
   --coral: #fb7185;
-  --magma: #ff6b35;
+  --magma: #a855f7;
+  --gemini-grad: linear-gradient(135deg, #4b90ff 0%, #a855f7 52%, #ec4899 100%);
 
-  --text-primary: #f0f9ff;
-  --text-secondary: #94a3b8;
+  --text-primary: #f8fafc;
+  --text-secondary: #a5b4fc;
   --text-muted: #64748b;
 
   --font-sans: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -55,11 +56,11 @@ body {
 }
 
 .highlight-cyan {
-  color: var(--cyan);
+  color: #60a5fa;
 }
 
 .highlight-amber {
-  color: var(--amber);
+  color: #f472b6;
 }
 
 /* ==================== Top Navigation HUD ==================== */
@@ -68,17 +69,17 @@ body {
   top: 12px;
   left: 14px;
   right: 14px;
-  height: 60px;
+  height: 62px;
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 18px;
   background: var(--glass-bg);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
   border: 1px solid var(--glass-border);
   border-radius: 14px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 36px rgba(4, 5, 15, 0.7), inset 0 1px 0 rgba(192, 132, 252, 0.16);
 }
 
 .brand-block {
@@ -97,17 +98,17 @@ body {
 }
 
 .emblem-core {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--amber), var(--magma));
-  box-shadow: 0 0 14px var(--magma);
+  background: var(--gemini-grad);
+  box-shadow: 0 0 16px #a855f7;
 }
 
 .emblem-ring {
   position: absolute;
   inset: 2px;
-  border: 2px dashed var(--cyan);
+  border: 2px dashed #60a5fa;
   border-radius: 50%;
   animation: spinSlow 10s linear infinite;
 }
@@ -119,18 +120,51 @@ body {
 }
 
 .brand-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-display);
   font-size: 9.5px;
-  letter-spacing: 1.5px;
-  color: var(--cyan);
-  opacity: 0.9;
+  letter-spacing: 1px;
+  color: #93c5fd;
+  margin-bottom: 2px;
+}
+
+.version-pill {
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: rgba(75, 144, 255, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  color: #bfdbfe;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.argon-credit-pill {
+  padding: 1px 8px;
+  border-radius: 99px;
+  background: var(--gemini-grad);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.argon-credit-pill:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 16px rgba(236, 72, 153, 0.75);
 }
 
 .brand-title {
   font-size: 16.5px;
   font-weight: 900;
   letter-spacing: 0.5px;
-  background: linear-gradient(90deg, #ffffff, #7dd3fc);
+  background: linear-gradient(90deg, #ffffff 0%, #93c5fd 45%, #e879f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -139,10 +173,10 @@ body {
 .mode-tabs {
   display: flex;
   gap: 6px;
-  background: rgba(2, 8, 20, 0.65);
+  background: rgba(6, 7, 18, 0.72);
   padding: 4px;
   border-radius: 10px;
-  border: 1px solid rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.25);
 }
 
 .mode-tab {
@@ -163,13 +197,13 @@ body {
 
 .mode-tab:hover {
   color: var(--text-primary);
-  background: rgba(56, 189, 248, 0.1);
+  background: rgba(139, 92, 246, 0.16);
 }
 
 .mode-tab.active {
-  color: #02101f;
-  background: linear-gradient(135deg, var(--cyan), var(--sky));
-  box-shadow: 0 0 16px rgba(0, 242, 254, 0.45);
+  color: #ffffff;
+  background: var(--gemini-grad);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.55);
 }
 
 /* Top Right Actions */
@@ -816,19 +850,19 @@ body {
   padding: 11px 16px;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(135deg, var(--cyan), #0284c7);
-  color: #02101f;
+  background: var(--gemini-grad);
+  color: #ffffff;
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(0, 242, 254, 0.35);
+  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.42);
   transition: all 0.2s ease;
 }
 
 .primary-action-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0, 242, 254, 0.55);
+  box-shadow: 0 6px 24px rgba(236, 72, 153, 0.65);
 }
 
 .danger-outline-btn {
@@ -1300,6 +1334,45 @@ body {
   gap: 8px;
   font-size: 13px;
   line-height: 1.5;
+}
+
+.argon-contribution-card {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(75, 144, 255, 0.14), rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0.14));
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 22px rgba(139, 92, 246, 0.18);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #e2e8f0;
+}
+
+.argon-card-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: #f0abfc;
+  margin-bottom: 6px;
+}
+
+.argon-sparkle {
+  display: inline-block;
+  font-size: 16px;
+  background: var(--gemini-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.argon-contribution-card code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #93c5fd;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
 }
 
 /* 3D Node Hover Tooltip */

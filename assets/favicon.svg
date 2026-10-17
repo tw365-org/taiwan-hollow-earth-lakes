@@ -1,39 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <defs>
-    <radialGradient id="abyssBg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0a2540" />
-      <stop offset="100%" stop-color="#030812" />
+    <radialGradient id="argonBg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#17153b" />
+      <stop offset="100%" stop-color="#060711" />
     </radialGradient>
-    <radialGradient id="moltenCore" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#fde047" />
-      <stop offset="55%" stop-color="#fb923c" />
-      <stop offset="100%" stop-color="#ea580c" />
-    </radialGradient>
-    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00f2fe" />
-      <stop offset="100%" stop-color="#38bdf8" />
+    <linearGradient id="geminiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4b90ff" />
+      <stop offset="48%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#ec4899" />
     </linearGradient>
+    <radialGradient id="argonCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0abfc" />
+      <stop offset="50%" stop-color="#9333ea" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </radialGradient>
   </defs>
 
-  <!-- Deep Subterranean Globe Background -->
-  <circle cx="64" cy="64" r="60" fill="url(#abyssBg)" stroke="url(#cyanGlow)" stroke-width="4" />
+  <!-- Deep Argon Space Globe -->
+  <circle cx="64" cy="64" r="60" fill="url(#argonBg)" stroke="url(#geminiGradient)" stroke-width="4.5" />
 
-  <!-- Hollow Earth Tectonic Grid Rings -->
-  <circle cx="64" cy="64" r="46" fill="none" stroke="#00f2fe" stroke-width="2" stroke-dasharray="8 6" opacity="0.65" />
-  <ellipse cx="64" cy="64" rx="52" ry="22" fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.45" transform="rotate(-24 64 64)" />
-  <ellipse cx="64" cy="64" rx="52" ry="22" fill="none" stroke="#c084fc" stroke-width="1.8" opacity="0.45" transform="rotate(32 64 64)" />
+  <!-- Antigravity Orbital Rings -->
+  <circle cx="64" cy="64" r="46" fill="none" stroke="#60a5fa" stroke-width="2" stroke-dasharray="7 5" opacity="0.7" />
+  <ellipse cx="64" cy="64" rx="52" ry="22" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.55" transform="rotate(-26 64 64)" />
+  <ellipse cx="64" cy="64" rx="52" ry="22" fill="none" stroke="#f472b6" stroke-width="2" opacity="0.55" transform="rotate(30 64 64)" />
 
-  <!-- Glowing Molten Inner Core -->
-  <circle cx="64" cy="68" r="19" fill="url(#moltenCore)" />
+  <!-- Argon Plasma Inner Core -->
+  <circle cx="64" cy="68" r="19" fill="url(#argonCore)" />
 
-  <!-- Stylised 3D Taiwan Island & Subterranean Water Vein -->
+  <!-- Stylised 3D Taiwan Island -->
   <path
     d="M68 18 C76 24, 80 38, 76 54 C72 68, 66 84, 62 96 C58 86, 53 72, 52 56 C51 40, 58 24, 68 18 Z"
-    fill="#00f2fe"
-    fill-opacity="0.88"
+    fill="url(#geminiGradient)"
+    fill-opacity="0.92"
     stroke="#ffffff"
     stroke-width="2"
   />
-  <!-- Sun Moon Lake / Alpine Beacon Gem -->
-  <circle cx="65" cy="52" r="5" fill="#fbbf24" stroke="#030812" stroke-width="1.5" />
+
+  <!-- Gemini 4-Point Sparkle Star at Sun Moon Lake Center -->
+  <path
+    d="M65 40 Q65 51 76 51 Q65 51 65 62 Q65 51 54 51 Q65 51 65 40 Z"
+    fill="#ffffff"
+  />
 </svg>

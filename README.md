@@ -2,19 +2,18 @@
 
 <p align="center">
   <a href="https://tw365-org.github.io/taiwan-hollow-earth-lakes/" target="_blank">
-    <img src="https://img.shields.io/badge/%F0%9F%9A%80_%E7%AB%8B%E5%8D%B3%E7%B7%9A%E4%B8%8A%E9%AB%94%E9%A9%97-Play_Live_Demo-00f2fe?style=for-the-badge&logo=googleearth&logoColor=030812" alt="立即線上體驗 Play Live Demo" />
+    <img src="https://img.shields.io/badge/%F0%9F%9A%80_%E7%AB%8B%E5%8D%B3%E7%B7%9A%E4%B8%8A%E9%AB%94%E9%A9%97-Play_Live_Demo-4b90ff?style=for-the-badge&logo=googleearth&logoColor=ffffff" alt="立即線上體驗 Play Live Demo" />
   </a>
+  <img src="https://img.shields.io/badge/Version-v1.2.0-a855f7?style=for-the-badge" alt="Version v1.2.0" />
+  <img src="https://img.shields.io/badge/%E2%9C%A8_AI_Model-Gemini_4_Argon_%C3%97_agy_CLI-ec4899?style=for-the-badge&logo=googlegemini&logoColor=ffffff" alt="Powered by Gemini 4 Argon × agy CLI" />
   <a href="https://github.com/tw365-org/taiwan-hollow-earth-lakes/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-34d399?style=for-the-badge" alt="MIT License" />
-  </a>
-  <a href="https://threejs.org/">
-    <img src="https://img.shields.io/badge/3D_Engine-Three.js_r160-fbbf24?style=for-the-badge&logo=threedotjs&logoColor=030812" alt="Three.js" />
   </a>
 </p>
 
 > **🌐 線上立即體驗 (Live Demo)**：👉 **[https://tw365-org.github.io/taiwan-hollow-earth-lakes/](https://tw365-org.github.io/taiwan-hollow-earth-lakes/)**
 >
-> **Hollow Earth Subterranean Aquifer Explorer** — 駕駛地底探勘潛艇穿梭於 3D 透視空心地球與台灣深層水脈，浮出全台 **天然湖泊、高山湖泊、重要水庫、特色埤塘與海岸潟湖**，深度認識每座水域所在的 **縣市與鄉鎮市區**，並提供真實政府主管機關與維基百科官方查證連結。
+> **✨ 版本與開發貢獻 (`v1.2.0`)**：本專案透過 **Antigravity (`agy` CLI)** 發起，由 Google DeepMind **Gemini 4 Argon** 模型協作完成 3D 空心地球等離子引擎、全台湖泊/水庫/埤塘/潟湖與鄉鎮地理資料庫、真實官方權威連結查證及星芒藍紫漸層介面設計。
 
 ---
 
@@ -34,10 +33,10 @@
 
 ---
 
-### 3. ⚡ 台灣湖泊與鄉鎮連勝競答挑戰
-透過四選一互動問答考驗你對全台天然湖泊、高山湖泊、水庫、埤塘與潟湖所屬 **鄉鎮市區** 的熟悉度，答對即可觸發水脈共鳴淨化並一鍵導航潛艇巡航至該座湖泊：
+### 3. ✨ 潛艇駕駛手冊 × Gemini 4 Argon & `agy` CLI 協作貢獻聲明 (`v1.2.0`)
+點擊頂部 **`✨ Gemini 4 Argon × agy CLI`** 徽章或右上角 **`?`** 按鈕，即可檢視完整 3D 潛艇鍵盤操控指南、三大遊戲模式說明，以及本專案由 **Google DeepMind Gemini 4 Argon × Antigravity (`agy` CLI)** 打造的架構與配色貢獻說明：
 
-![台灣湖泊與鄉鎮連勝競答挑戰](./assets/screenshots/03-township-quiz-challenge.png)
+![潛艇操作指南與 Gemini 4 Argon 開發貢獻](./assets/screenshots/03-township-quiz-challenge.png)
 
 ---
 
