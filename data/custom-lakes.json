@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "project": "taiwan-hollow-earth-lakes",
+  "description": "可擴充之台灣湖泊、高山湖泊、水庫、埤塘與潟湖外部資料包。你可以直接在此 JSON 新增條目，或在遊戲內點擊「擴充水域節點」即時新增並匯出！",
+  "lakes": [
+    {
+      "id": "mingchi-lake",
+      "name": "明池 (池端)",
+      "englishName": "Mingchi Alpine Lake",
+      "city": "宜蘭縣",
+      "township": "大同鄉",
+      "region": "east",
+      "category": "alpine",
+      "lat": 24.6503,
+      "lng": 121.4719,
+      "elevation": 1150,
+      "area": "3.0 公頃",
+      "depth": "5.0 公尺",
+      "aquiferDepth": 16.0,
+      "geology": "位於北橫公路最高點附近的高山凹地湖泊，源於三光溪上游地底冷泉與山澗匯聚，湖中插有千年紅檜枯木，與遠山白雪交映，素有「北橫明珠」美譽。",
+      "townshipIntro": "【宜蘭縣大同鄉】橫跨雪山山脈與中央山脈北端，為泰雅族原鄉，擁有棲蘭神木園、明池國家森林遊樂區、太平山與梵梵野溪溫泉。",
+      "funFact": "明池中矗立的巨大紅檜枯木，宛如太古森林沉入湖底的時空見證者，每天還有黑天鵝與綠頭鴨伴隨森林音樂會悠游！",
+      "officialLinks": [
+        {
+          "title": "農業部林業及自然保育署：台灣山林悠遊網（明池國家森林遊樂區）",
+          "url": "https://recreation.forest.gov.tw/"
+        },
+        {
+          "title": "宜蘭勁好玩（宜蘭縣政府觀光旅遊網）",
+          "url": "https://travel.yilan.tw/"
+        },
+        {
+          "title": "維基百科：明池國家森林遊樂區",
+          "url": "https://zh.wikipedia.org/zh-tw/%E6%98%8E%E6%B1%A0%E5%9C%8B%E5%AE%B6%E6%A3%AE%E6%9E%97%E9%81%8A%E6%A8%82%E5%8D%80"
+        }
+      ],
+      "quiz": {
+        "question": "被譽為「北橫明珠」、湖中矗立千年紅檜枯木的高山湖泊「明池」，位於哪一個縣市與鄉鎮？",
+        "options": [
+          "宜蘭縣大同鄉",
+          "桃園市大溪區",
+          "花蓮縣秀林鄉",
+          "新北市坪林區"
+        ],
+        "answerIndex": 0,
+        "explanation": "明池位於北橫公路宜蘭縣大同鄉英士村，緊鄰桃園市復興區交界。"
+      }
+    },
+    {
+      "id": "kinmen-taihu-reservoir",
+      "name": "金門太湖",
+      "englishName": "Taihu Lake (Kinmen)",
+      "city": "金門縣",
+      "township": "金湖鎮",
+      "region": "islands",
+      "category": "reservoir",
+      "lat": 24.4392,
+      "lng": 118.4236,
+      "elevation": 12,
+      "area": "36.0 公頃",
+      "depth": "7.5 公尺",
+      "aquiferDepth": 6.0,
+      "geology": "位於金門本島東南部太武山麓下，1967年由國軍築壩攔截山外溪水脈建成，是金門規模最大的人工淡水湖泊，更造就了「金湖鎮」的鎮名。",
+      "townshipIntro": "【金門縣金湖鎮】因境內擁有「太湖」與「蘭湖」而得名「金湖」，坐擁太武山「毋忘在莒」勒石、八二三戰史館、陳景蘭洋樓與野生歐亞水獺棲地。",
+      "funFact": "金門太湖是瀕臨絕種保育類動物「歐亞水獺（Eurasian Otter）」在中華民國境內最重要的天然庇護所與地底水路廊道！",
+      "officialLinks": [
+        {
+          "title": "內政部國家公園署金門國家公園管理處官網",
+          "url": "https://www.kmnp.gov.tw/"
+        },
+        {
+          "title": "金門觀光旅遊網（金門縣政府觀光處）",
+          "url": "https://kinmen.travel/"
+        },
+        {
+          "title": "維基百科：太湖 (金門)",
+          "url": "https://zh.wikipedia.org/zh-tw/%E5%A4%AA%E6%B9%96_(%E9%87%91%E9%96%80)"
+        }
+      ],
+      "quiz": {
+        "question": "金門最大的人工淡水湖庫、且為保育類「歐亞水獺」重要棲地的「太湖」，位於金門縣哪一個鄉鎮？",
+        "options": [
+          "金湖鎮",
+          "金城鎮",
+          "金沙鎮",
+          "烈嶼鄉"
+        ],
+        "answerIndex": 0,
+        "explanation": "太湖位於金門縣金湖鎮山外里，金湖鎮之名亦與境內湖泊息息相關。"
+      }
+    }
+  ]
+}

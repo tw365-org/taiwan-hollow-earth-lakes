@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>地心水脈：台灣湖泊與鄉鎮 3D 地底地球探索遊戲 | TERRA-AQUA TAIWAN 3D</title>
+  <meta name="description" content="3D 透視空心地球與台灣地底水脈探索小遊戲，駕駛地底探勘潛艇穿梭全台湖泊、高山湖泊、水庫、埤塘與潟湖，認識台灣各縣市鄉鎮地理與水文特色。" />
+  <meta name="keywords" content="台灣湖泊, 台灣水庫, 埤塘, 潟湖, 台灣鄉鎮地理, 3D地球遊戲, Three.js, 空心地球, Hollow Earth Taiwan" />
+  <meta name="theme-color" content="#030812" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Open-Source ES Module Import Map (Three.js + Addons + GSAP + Canvas Confetti) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+        "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm",
+        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/+esm"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- 3D WebGL Canvas Container -->
+  <div id="canvas-container" aria-label="3D 台灣地底地球水脈場景"></div>
+
+  <!-- Hover 3D Tooltip -->
+  <div id="node-tooltip" class="node-tooltip hidden"></div>
+
+  <!-- Top HUD Navigation Bar -->
+  <header class="top-hud">
+    <div class="brand-block">
+      <div class="brand-emblem" title="TERRA-AQUA TAIWAN">
+        <span class="emblem-core"></span>
+        <span class="emblem-ring"></span>
+      </div>
+      <div class="brand-text">
+        <div class="brand-subtitle">HOLLOW EARTH // SUBTERRANEAN AQUIFER 3D</div>
+        <h1 class="brand-title">地心水脈：台灣湖泊鄉鎮探索號</h1>
+      </div>
+    </div>
+
+    <!-- Game Mode Switcher -->
+    <nav class="mode-tabs" role="tablist" aria-label="遊戲模式切換">
+      <button class="mode-tab active" data-mode="explore" id="tab-explore">
+        <span class="tab-icon">🧭</span>
+        <span>自由巡航圖鑑</span>
+      </button>
+      <button class="mode-tab" data-mode="mission" id="tab-mission">
+        <span class="tab-icon">🎯</span>
+        <span>地底領航任務</span>
+      </button>
+      <button class="mode-tab" data-mode="quiz" id="tab-quiz">
+        <span class="tab-icon">⚡</span>
+        <span>鄉鎮湖泊競答</span>
+      </button>
+    </nav>
+
+    <!-- Player Telemetry & Actions -->
+    <div class="top-actions">
+      <div class="stat-pill" title="已解鎖台灣水域節點">
+        <span class="stat-label">已探勘水域</span>
+        <span class="stat-value" id="stat-unlocked">0 / 36</span>
+      </div>
+      <div class="stat-pill" title="水脈探索積分">
+        <span class="stat-label">探勘積分</span>
+        <span class="stat-value highlight-amber" id="stat-score">0 XP</span>
+      </div>
+
+      <button class="hud-btn accent-emerald" id="btn-open-extender" title="新增或匯入擴充湖泊、水庫、埤塘與潟湖">
+        <span>➕ 擴充水域節點</span>
+      </button>
+      <button class="hud-btn" id="btn-open-atlas" title="開啟全台湖泊與鄉鎮總覽百科">
+        <span>📖 鄉鎮圖鑑</span>
+      </button>
+      <button class="hud-btn icon-only" id="btn-toggle-audio" title="切換深海聲納與水脈環境音效">
+        <span id="audio-icon">🔊</span>
+      </button>
+      <button class="hud-btn icon-only" id="btn-open-help" title="操作說明與遊戲指南">
+        <span>❓</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mission HUD Banner (Shown in Navigator Mission Mode) -->
+  <section id="mission-banner" class="mission-banner hidden" aria-live="polite">
+    <div class="mission-header">
+      <span class="mission-badge" id="mission-step-badge">領航任務 #1</span>
+      <span class="mission-radar-status" id="mission-distance-readout">聲納距離計算中...</span>
+    </div>
+    <p class="mission-clue" id="mission-clue-text">
+      正在接收地心水脈總部指令...
+    </p>
+    <div class="mission-actions">
+      <button class="hud-btn small accent-cyan" id="btn-mission-ping">📡 發射聲納波導引</button>
+      <button class="hud-btn small accent-amber" id="btn-mission-autopilot">🚀 自動潛行揭曉答案</button>
+      <button class="hud-btn small" id="btn-mission-skip">⏭️ 換一題任務</button>
+    </div>
+  </section>
+
+  <!-- Left Radar & Lake Explorer Sidebar -->
+  <aside id="sidebar-panel" class="sidebar-panel">
+    <div class="sidebar-toggle-row">
+      <div class="sub-tier-card" id="sub-tier-card">
+        <span class="tier-badge-icon" id="sub-tier-icon">🛸</span>
+        <div class="tier-info">
+          <div class="tier-label">潛艇階級 // SUBMERSIBLE TIER</div>
+          <div class="tier-title" id="sub-tier-title">初階地底聲納艇 MK-I</div>
+        </div>
+      </div>
+      <button class="sidebar-collapse-btn" id="btn-collapse-sidebar" title="收合/展開側邊水脈清單">◀</button>
+    </div>
+
+    <div class="sidebar-content" id="sidebar-content">
+      <!-- Search Input -->
+      <div class="search-box">
+        <input
+          type="search"
+          id="search-lake-input"
+          placeholder="搜尋湖泊、縣市或鄉鎮 (例：魚池鄉、七股、水庫)..."
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-pills" id="category-pills">
+        <button class="cat-pill active" data-category="all">全部水域</button>
+        <button class="cat-pill" data-category="natural">💧 天然湖泊</button>
+        <button class="cat-pill" data-category="alpine">🏔️ 高山湖泊</button>
+        <button class="cat-pill" data-category="reservoir">🌊 重要水庫</button>
+        <button class="cat-pill" data-category="pond">🌱 特色埤塘</button>
+        <button class="cat-pill" data-category="lagoon">🐚 海岸潟湖</button>
+      </div>
+
+      <!-- Region Filter -->
+      <div class="region-filter-row">
+        <select id="region-select" aria-label="依台灣區域篩選">
+          <option value="all">🗺️ 全台及離島所有水脈區</option>
+          <option value="north">北部水脈區（北北基桃竹苗）</option>
+          <option value="central">中部水脈區（中彰投雲）</option>
+          <option value="south">南部水脈區（嘉南高屏）</option>
+          <option value="east">東部水脈區（宜花東）</option>
+          <option value="islands">離島水脈區（澎湖、金門、蘭嶼）</option>
+        </select>
+        <span class="filter-count" id="filtered-count-label">36 座</span>
+      </div>
+
+      <!-- Scrollable Lake & Township List -->
+      <div class="lake-list" id="lake-list" role="list"></div>
+    </div>
+  </aside>
+
+  <!-- Right Lake & Township Discovery Drawer -->
+  <aside id="lake-detail-drawer" class="lake-detail-drawer hidden" aria-labelledby="drawer-lake-name">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-category-row">
+          <span class="category-tag" id="drawer-category-tag">天然湖泊</span>
+          <span class="status-tag" id="drawer-status-tag">已探勘解鎖</span>
+        </div>
+        <h2 class="drawer-title" id="drawer-lake-name">日月潭</h2>
+        <div class="drawer-en-name" id="drawer-lake-en">Sun Moon Lake</div>
+      </div>
+      <button class="drawer-close-btn" id="btn-close-drawer" title="關閉資訊卡">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- City & Township Spotlight Banner -->
+      <div class="township-spotlight">
+        <div class="spotlight-label">📍 所屬城市與鄉鎮市區行政轄區</div>
+        <div class="spotlight-location">
+          <span class="city-badge" id="drawer-city">南投縣</span>
+          <span class="location-divider">▸</span>
+          <span class="township-badge" id="drawer-township">魚池鄉</span>
+        </div>
+        <div class="spotlight-coords" id="drawer-coords">23.8628°N, 120.9158°E | 地底水脈深 -20.0 km</div>
+      </div>
+
+      <!-- Quick Specs Grid -->
+      <div class="specs-grid">
+        <div class="spec-box">
+          <span class="spec-label">海拔高度</span>
+          <span class="spec-val" id="drawer-elevation">748 m</span>
+        </div>
+        <div class="spec-box">
+          <span class="spec-label">水域面積</span>
+          <span class="spec-val" id="drawer-area">793 公頃</span>
+        </div>
+        <div class="spec-box">
+          <span class="spec-label">最大水深</span>
+          <span class="spec-val" id="drawer-depth">27 公尺</span>
+        </div>
+      </div>
+
+      <!-- Township Cultural & Geographical Intro -->
+      <div class="info-section">
+        <h3 class="info-heading">🏘️ 鄉鎮市區人文與物產特色</h3>
+        <p class="info-paragraph" id="drawer-township-intro"></p>
+      </div>
+
+      <!-- Subterranean & Geological Formation -->
+      <div class="info-section">
+        <h3 class="info-heading">🌋 地底水脈與地質成因解密</h3>
+        <p class="info-paragraph" id="drawer-geology"></p>
+      </div>
+
+      <!-- Fun Fact Box -->
+      <div class="funfact-box">
+        <div class="funfact-title">💡 地心探勘秘聞</div>
+        <p id="drawer-funfact"></p>
+      </div>
+
+      <!-- Verified Official Introduction Links -->
+      <div class="info-section">
+        <h3 class="info-heading">🏛️ 官方介紹與權威查證連結</h3>
+        <div class="official-links-list" id="drawer-official-links"></div>
+      </div>
+
+      <!-- Interactive Resonance Quiz Trigger -->
+      <div class="drawer-footer-actions">
+        <button class="primary-action-btn" id="btn-drawer-quiz">
+          ⚡ 啟動「水脈共鳴問答」淨化節點 (+150 XP)
+        </button>
+        <button class="danger-outline-btn hidden" id="btn-delete-custom-lake">
+          🗑️ 刪除此自訂擴充節點
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Township Quiz Modal (Used for both Quiz Mode & Single Lake Resonance Challenge) -->
+  <div id="quiz-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card quiz-card">
+      <div class="modal-header">
+        <div>
+          <span class="quiz-mode-pill" id="quiz-mode-pill">水脈共鳴知識挑戰</span>
+          <h2 id="quiz-title">台灣湖泊與鄉鎮大考驗</h2>
+        </div>
+        <div class="quiz-header-right">
+          <span class="streak-badge" id="quiz-streak-badge">🔥 連勝 0</span>
+          <button class="drawer-close-btn" id="btn-close-quiz">✕</button>
+        </div>
+      </div>
+
+      <div class="quiz-body">
+        <p class="quiz-question" id="quiz-question-text"></p>
+        <div class="quiz-options" id="quiz-options-container"></div>
+
+        <div id="quiz-feedback" class="quiz-feedback hidden">
+          <div class="feedback-status" id="quiz-feedback-status"></div>
+          <p class="feedback-explanation" id="quiz-feedback-explanation"></p>
+          <div class="feedback-actions">
+            <button class="hud-btn accent-cyan" id="btn-quiz-flyto">🛸 潛艇巡航至該湖泊</button>
+            <button class="hud-btn accent-amber" id="btn-quiz-next">下一題挑戰 ▸</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Extensible Lake / Reservoir / Pond / Lagoon Node Manager Modal -->
+  <div id="extender-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card extender-card">
+      <div class="modal-header">
+        <div>
+          <span class="quiz-mode-pill">OPEN DATA & EXTENSIBLE REGISTRY</span>
+          <h2>➕ 擴充台灣湖泊、水庫、埤塘與潟湖節點</h2>
+        </div>
+        <button class="drawer-close-btn" id="btn-close-extender">✕</button>
+      </div>
+
+      <div class="extender-body">
+        <p class="extender-intro">
+          本專案採用<strong>開放式可擴充水脈架構</strong>！你可以直接在下方表單新增任何台灣的<strong>天然湖泊、高山湖泊、水庫、埤塘或潟湖</strong>（支援附上真實官方網站連結），系統會立即在 3D 空心地球建立地底水脈井並自動連通鄰近水脈；亦可匯出/匯入 JSON 資料包提交至 GitHub 開源社群。
+        </p>
+
+        <form id="custom-lake-form" class="extender-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ext-name">水域中文名稱 *</label>
+              <input type="text" id="ext-name" required placeholder="例如：新山水庫 / 觀音龍貓埤塘" />
+            </div>
+            <div class="form-group">
+              <label for="ext-en">英文或別名</label>
+              <input type="text" id="ext-en" placeholder="例如：Xinshan Reservoir" />
+            </div>
+            <div class="form-group">
+              <label for="ext-category">水域分類 *</label>
+              <select id="ext-category" required>
+                <option value="natural">💧 天然湖泊 (Natural Lake)</option>
+                <option value="alpine">🏔️ 高山湖泊 (Alpine Lake)</option>
+                <option value="reservoir">🌊 重要水庫 (Reservoir)</option>
+                <option value="pond">🌱 特色埤塘 (Historic Pond)</option>
+                <option value="lagoon">🐚 海岸潟湖 (Coastal Lagoon)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ext-city">所屬縣市 *</label>
+              <input type="text" id="ext-city" required placeholder="例如：基隆市 / 桃園市 / 臺南市" />
+            </div>
+            <div class="form-group">
+              <label for="ext-township">所屬鄉鎮市區 *</label>
+              <input type="text" id="ext-township" required placeholder="例如：安樂區 / 新屋區 / 鹽水區" />
+            </div>
+            <div class="form-group">
+              <label for="ext-region">所屬水脈分區 *</label>
+              <select id="ext-region" required>
+                <option value="north">北部水脈區</option>
+                <option value="central">中部水脈區</option>
+                <option value="south">南部水脈區</option>
+                <option value="east">東部水脈區</option>
+                <option value="islands">離島水脈區</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ext-lat">北緯 (Latitude) *</label>
+              <input type="number" step="0.0001" min="21.5" max="26.5" id="ext-lat" required placeholder="例：25.1265" />
+            </div>
+            <div class="form-group">
+              <label for="ext-lng">東經 (Longitude) *</label>
+              <input type="number" step="0.0001" min="118.0" max="122.5" id="ext-lng" required placeholder="例：121.7085" />
+            </div>
+            <div class="form-group">
+              <label for="ext-elevation">海拔高度 (公尺)</label>
+              <input type="number" id="ext-elevation" value="80" placeholder="例：85" />
+            </div>
+            <div class="form-group">
+              <label for="ext-area">面積與水深</label>
+              <input type="text" id="ext-area" placeholder="例：56 公頃" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="ext-official-url">🏛️ 官方介紹網址 (請填寫真實政府機關、水利署、國家風景區或維基百科網址) *</label>
+              <input type="url" id="ext-official-url" required placeholder="https://www.wra.gov.tw/ 或 https://zh.wikipedia.org/zh-tw/..." />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ext-geology">地質水脈成因介紹</label>
+              <textarea id="ext-geology" rows="2" placeholder="簡述此湖泊/水庫/埤塘/潟湖的水源與地形特徵..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="ext-township-intro">所屬鄉鎮人文與物產特色</label>
+              <textarea id="ext-township-intro" rows="2" placeholder="介紹該鄉鎮市區的歷史、地名由來或知名物產..."></textarea>
+            </div>
+          </div>
+
+          <div class="extender-actions">
+            <button type="submit" class="primary-action-btn">✨ 立即加入 3D 地底地球並導航前往</button>
+            <div class="json-io-btns">
+              <button type="button" class="hud-btn accent-cyan" id="btn-export-json">⬇️ 匯出擴充 JSON</button>
+              <label class="hud-btn accent-amber file-label">
+                ⬆️ 匯入擴充 JSON
+                <input type="file" id="input-import-json" accept=".json,application/json" hidden />
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-Screen Atlas / Encyclopedia Modal -->
+  <div id="atlas-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card atlas-card">
+      <div class="modal-header">
+        <div>
+          <span class="quiz-mode-pill">TAIWAN HYDROLOGY & TOWNSHIP ATLAS</span>
+          <h2>📖 台灣全境湖泊、水庫、埤塘與潟湖鄉鎮總覽百科</h2>
+        </div>
+        <button class="drawer-close-btn" id="btn-close-atlas">✕</button>
+      </div>
+      <div class="atlas-body">
+        <div class="atlas-table-wrapper">
+          <table class="atlas-table">
+            <thead>
+              <tr>
+                <th>狀態</th>
+                <th>水域名稱</th>
+                <th>分類</th>
+                <th>所屬縣市</th>
+                <th>鄉鎮市區</th>
+                <th>海拔 / 面積</th>
+                <th>官方權威連結</th>
+                <th>行動</th>
+              </tr>
+            </thead>
+            <tbody id="atlas-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help & Controls Modal -->
+  <div id="help-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card help-card">
+      <div class="modal-header">
+        <div>
+          <span class="quiz-mode-pill">PILOT MANUAL // 潛艇駕駛手冊</span>
+          <h2>🛸 地底探勘潛艇「Nautilus-TW」操作與任務指南</h2>
+        </div>
+        <button class="drawer-close-btn" id="btn-close-help">✕</button>
+      </div>
+      <div class="help-body">
+        <div class="help-grid">
+          <div class="help-box">
+            <h3>🎮 3D 潛艇與鏡頭操控</h3>
+            <ul>
+              <li><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> 或 <kbd>方向鍵</kbd>：駕駛地底潛艇前後巡航與轉向</li>
+              <li><kbd>E</kbd> / <kbd>Q</kbd>：潛艇上浮至地表 / 下潛至深層地底水脈</li>
+              <li><kbd>Space</kbd>（空白鍵）：發射 3D 地底聲納波，並自動浮出最近湖泊進行探勘！</li>
+              <li><kbd>Shift</kbd>：啟動潛艇渦輪加速推進</li>
+              <li><strong>滑鼠左鍵拖曳 / 滾輪</strong>：360° 旋轉透視空心地球與縮放視角</li>
+              <li><strong>點擊 3D 湖泊節點或左側清單</strong>：啟動自動導航潛行至該鄉鎮湖泊</li>
+            </ul>
+          </div>
+          <div class="help-box">
+            <h3>🌊 三大玩法與擴充系統</h3>
+            <ul>
+              <li><strong>🧭 自由巡航圖鑑</strong>：自由穿梭台灣地底水脈，認識各縣市鄉鎮的天然湖泊、高山湖泊、水庫、埤塘與潟湖。</li>
+              <li><strong>🎯 地底領航任務</strong>：根據「鄉鎮人文線索」與「地質提示」，駕駛潛艇尋找目標湖泊並浮出水面！</li>
+              <li><strong>⚡ 鄉鎮湖泊競答</strong>：挑戰連勝問答，測試你對台灣各湖泊所在鄉鎮市區的熟悉度。</li>
+              <li><strong>➕ 開放式擴充節點</strong>：隨時新增更多湖泊、水庫、埤塘與潟湖，並附上真實官方介紹連結。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Submarine Cockpit HUD -->
+  <footer class="cockpit-hud">
+    <!-- Left Telemetry -->
+    <div class="cockpit-telemetry">
+      <div class="telemetry-item">
+        <span class="tel-label">潛艇座標</span>
+        <span class="tel-value mono" id="tel-coords">23.65°N, 120.95°E</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="tel-label">水脈深度</span>
+        <span class="tel-value mono highlight-cyan" id="tel-depth">-9.5 km 地底水脈層</span>
+      </div>
+      <div class="telemetry-item nearest-item">
+        <span class="tel-label">最近鄉鎮水域聲納</span>
+        <span class="tel-value" id="tel-nearest">掃描中...</span>
+      </div>
+    </div>
+
+    <!-- Center Submarine Controls (Keyboard + Touch/Click) -->
+    <div class="cockpit-controls">
+      <div class="dpad-group" aria-label="潛艇方向控制">
+        <button class="ctrl-key" data-key="up" title="上浮 (E)">▲ 上浮 <kbd>E</kbd></button>
+        <button class="ctrl-key" data-key="left" title="左轉 (A)">◀ <kbd>A</kbd></button>
+        <button class="ctrl-key" data-key="forward" title="前進 (W)">推進 <kbd>W</kbd></button>
+        <button class="ctrl-key" data-key="backward" title="後退 (S)">後退 <kbd>S</kbd></button>
+        <button class="ctrl-key" data-key="right" title="右轉 (D)"><kbd>D</kbd> ▶</button>
+        <button class="ctrl-key" data-key="down" title="下潛 (Q)">▼ 下潛 <kbd>Q</kbd></button>
+      </div>
+
+      <button class="sonar-action-btn" id="btn-sonar-surface" title="發射地底聲納並浮出最近湖泊 (空白鍵)">
+        <span class="sonar-pulse-dot"></span>
+        <span>聲納浮出探勘 <kbd>SPACE</kbd></span>
+      </button>
+    </div>
+
+    <!-- Right Camera & X-Ray Controls -->
+    <div class="cockpit-view-controls">
+      <div class="camera-preset-group">
+        <button class="view-btn active" data-cam="taiwan" id="cam-taiwan" title="台灣立體地底俯瞰視角">🗺️ 台灣透視</button>
+        <button class="view-btn" data-cam="globe" id="cam-globe" title="空心地球地心全景視角">🌍 地心全景</button>
+        <button class="view-btn" data-cam="sub" id="cam-sub" title="跟隨潛艇巡航視角">🛸 潛艇追尾</button>
+      </div>
+
+      <div class="xray-slider-group" title="調整台灣地殼透視度 (X-Ray Crust Opacity)">
+        <label for="crust-opacity-slider">地殼透視</label>
+        <input type="range" id="crust-opacity-slider" min="0.1" max="0.95" step="0.05" value="0.58" />
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
