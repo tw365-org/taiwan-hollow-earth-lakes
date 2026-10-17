@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="abyssBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a2540" />
+      <stop offset="100%" stop-color="#030812" />
+    </radialGradient>
+    <radialGradient id="moltenCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="55%" stop-color="#fb923c" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </radialGradient>
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Subterranean Globe Background -->
+  <circle cx="64" cy="64" r="60" fill="url(#abyssBg)" stroke="url(#cyanGlow)" stroke-width="4" />
+
+  <!-- Hollow Earth Tectonic Grid Rings -->
+  <circle cx="64" cy="64" r="46" fill="none" stroke="#00f2fe" stroke-width="2" stroke-dasharray="8 6" opacity="0.65" />
+  <ellipse cx="64" cy="64" rx="52" ry="22" fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.45" transform="rotate(-24 64 64)" />
+  <ellipse cx="64" cy="64" rx="52" ry="22" fill="none" stroke="#c084fc" stroke-width="1.8" opacity="0.45" transform="rotate(32 64 64)" />
+
+  <!-- Glowing Molten Inner Core -->
+  <circle cx="64" cy="68" r="19" fill="url(#moltenCore)" />
+
+  <!-- Stylised 3D Taiwan Island & Subterranean Water Vein -->
+  <path
+    d="M68 18 C76 24, 80 38, 76 54 C72 68, 66 84, 62 96 C58 86, 53 72, 52 56 C51 40, 58 24, 68 18 Z"
+    fill="#00f2fe"
+    fill-opacity="0.88"
+    stroke="#ffffff"
+    stroke-width="2"
+  />
+  <!-- Sun Moon Lake / Alpine Beacon Gem -->
+  <circle cx="65" cy="52" r="5" fill="#fbbf24" stroke="#030812" stroke-width="1.5" />
+</svg>
