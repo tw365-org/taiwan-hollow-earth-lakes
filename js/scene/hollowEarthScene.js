@@ -34,8 +34,8 @@ export class HollowEarthScene {
     this.callbacks = callbacks;
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x060711);
-    this.scene.fog = new THREE.FogExp2(0x060711, 0.004);
+    this.scene.background = new THREE.Color(0x121317);
+    this.scene.fog = new THREE.FogExp2(0x121317, 0.0038);
 
     this.camera = new THREE.PerspectiveCamera(
       50,
@@ -128,33 +128,33 @@ export class HollowEarthScene {
   }
 
   setupLights() {
-    const ambient = new THREE.AmbientLight(0x2e2a5a, 1.5);
+    const ambient = new THREE.AmbientLight(0x28324e, 1.55);
     this.scene.add(ambient);
 
-    const skyLight = new THREE.DirectionalLight(0x93c5fd, 1.5);
+    const skyLight = new THREE.DirectionalLight(0x749bff, 1.55);
     skyLight.position.set(30, 80, 40);
     this.scene.add(skyLight);
 
-    // Gemini 4 Argon 等離子地心內核紫粉光與水脈星光藍雙點光源
-    this.coreLight = new THREE.PointLight(0xc084fc, 5.0, 190, 1.2);
+    // Google Antigravity 光譜地心內核與水脈主光源 (#FBBC04 / #3186FF)
+    this.coreLight = new THREE.PointLight(0xfbbc04, 5.2, 190, 1.2);
     this.coreLight.position.set(0, -54, 0);
     this.scene.add(this.coreLight);
 
-    this.aquiferLight = new THREE.PointLight(0x4b90ff, 3.2, 130, 1.3);
+    this.aquiferLight = new THREE.PointLight(0x3186ff, 3.4, 130, 1.3);
     this.aquiferLight.position.set(0, -14, 0);
     this.scene.add(this.aquiferLight);
   }
 
   /**
-   * 建立空心地球地殼透視層、地函斷層環與 Argon 等離子地心太陽
+   * 建立空心地球地殼透視層、地函斷層環與 Google Antigravity 四色光譜地心太陽
    */
   buildHollowEarthCore() {
-    // 1. Argon 等離子地心內核 (Argon Plasma Inner Core at y = -56)
+    // 1. Google Antigravity 光譜地心內核 (Inner Core at y = -56)
     const coreGeo = new THREE.IcosahedronGeometry(9.5, 4);
     const coreMat = new THREE.MeshStandardMaterial({
-      color: 0x9333ea,
-      emissive: 0xc026d3,
-      emissiveIntensity: 1.75,
+      color: 0xfc413d,
+      emissive: 0xfbbc04,
+      emissiveIntensity: 1.65,
       roughness: 0.25,
       metalness: 0.3,
       wireframe: false
@@ -163,33 +163,33 @@ export class HollowEarthScene {
     this.innerCoreMesh.position.set(0, -56, 0);
     this.hollowGlobeGroup.add(this.innerCoreMesh);
 
-    // 地心外層 Gemini 星芒能量晶格籠
+    // 地心外層 Antigravity Blue (#3186FF) 能量晶格籠
     const coreCageGeo = new THREE.IcosahedronGeometry(12.4, 2);
     const coreCageMat = new THREE.MeshBasicMaterial({
-      color: 0x60a5fa,
+      color: 0x3186ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.48
+      opacity: 0.52
     });
     this.coreCageMesh = new THREE.Mesh(coreCageGeo, coreCageMat);
     this.coreCageMesh.position.set(0, -56, 0);
     this.hollowGlobeGroup.add(this.coreCageMesh);
 
-    // 2. Antigravity & Gemini 三色引力磁場光環 (Gemini Blue / Argon Violet / Nebula Pink)
+    // 2. Google Antigravity Press Kit 四色引力磁場光環 (#3186FF / #FC413D / #00B95C / #FFE432)
     this.coreRings = [];
-    const ringRadii = [18, 26, 36];
-    const ringColors = [0x4b90ff, 0xa855f7, 0xf472b6];
+    const ringRadii = [16, 22, 29, 36];
+    const ringColors = [0x3186ff, 0xfc413d, 0x00b95c, 0xffe432];
     ringRadii.forEach((radius, idx) => {
       const rGeo = new THREE.TorusGeometry(radius, 0.16, 12, 96);
       const rMat = new THREE.MeshBasicMaterial({
         color: ringColors[idx],
         transparent: true,
-        opacity: 0.45
+        opacity: 0.5
       });
       const ring = new THREE.Mesh(rGeo, rMat);
       ring.position.set(0, -56, 0);
-      ring.rotation.x = Math.PI / 2 + (idx - 1) * 0.35;
-      ring.rotation.y = idx * 0.5;
+      ring.rotation.x = Math.PI / 2 + (idx - 1.5) * 0.32;
+      ring.rotation.y = idx * 0.45;
       this.hollowGlobeGroup.add(ring);
       this.coreRings.push(ring);
     });
@@ -197,23 +197,24 @@ export class HollowEarthScene {
     // 3. 空心地球外層半透明地殼球體 (Hollow Earth Planetary Sphere centered at y = -56, radius = 56)
     const globeGeo = new THREE.SphereGeometry(56, 48, 36);
     const globeWireMat = new THREE.MeshBasicMaterial({
-      color: 0x6366f1,
+      color: 0x3186ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.09
+      opacity: 0.08
     });
     this.globeWireMesh = new THREE.Mesh(globeGeo, globeWireMat);
     this.globeWireMesh.position.set(0, -56, 0);
     this.hollowGlobeGroup.add(this.globeWireMesh);
 
     // 地底水脈深層等深線座標環 (y = -8, -16, -24)
+    const depthColors = [0x3186ff, 0x00b95c, 0xfbbc04];
     [-8, -16, -24].forEach((depthY, i) => {
       const gridRingGeo = new THREE.RingGeometry(28 + i * 8, 28.25 + i * 8, 64);
       const gridRingMat = new THREE.MeshBasicMaterial({
-        color: i === 1 ? 0xa855f7 : 0x4b90ff,
+        color: depthColors[i],
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.18 - i * 0.03
+        opacity: 0.2 - i * 0.03
       });
       const ring = new THREE.Mesh(gridRingGeo, gridRingMat);
       ring.rotation.x = -Math.PI / 2;
@@ -227,9 +228,9 @@ export class HollowEarthScene {
    */
   buildTaiwanTectonicCrust() {
     this.crustMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x131836,
-      emissive: 0x0d102b,
-      emissiveIntensity: 0.75,
+      color: 0x161b26,
+      emissive: 0x0f172a,
+      emissiveIntensity: 0.72,
       roughness: 0.22,
       metalness: 0.15,
       transmission: 0.35,
@@ -239,12 +240,12 @@ export class HollowEarthScene {
     });
 
     this.subCrustMaterial = new THREE.MeshStandardMaterial({
-      color: 0x11142d,
-      emissive: 0x312e81,
-      emissiveIntensity: 0.45,
+      color: 0x121622,
+      emissive: 0x1a73e8,
+      emissiveIntensity: 0.42,
       wireframe: true,
       transparent: true,
-      opacity: 0.26
+      opacity: 0.24
     });
 
     const createIslandMesh = (coords, extrudeDepth = 2.6, yOffset = -2.2) => {

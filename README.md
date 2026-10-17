@@ -2,18 +2,20 @@
 
 <p align="center">
   <a href="https://tw365-org.github.io/taiwan-hollow-earth-lakes/" target="_blank">
-    <img src="https://img.shields.io/badge/%F0%9F%9A%80_%E7%AB%8B%E5%8D%B3%E7%B7%9A%E4%B8%8A%E9%AB%94%E9%A9%97-Play_Live_Demo-4b90ff?style=for-the-badge&logo=googleearth&logoColor=ffffff" alt="立即線上體驗 Play Live Demo" />
+    <img src="https://img.shields.io/badge/%F0%9F%9A%80_%E7%AB%8B%E5%8D%B3%E7%B7%9A%E4%B8%8A%E9%AB%94%E9%A9%97-Play_Live_Demo-3186FF?style=for-the-badge&logo=googleearth&logoColor=ffffff" alt="立即線上體驗 Play Live Demo" />
   </a>
-  <img src="https://img.shields.io/badge/Version-v1.2.0-a855f7?style=for-the-badge" alt="Version v1.2.0" />
-  <img src="https://img.shields.io/badge/%E2%9C%A8_AI_Model-Gemini_4_Argon_%C3%97_agy_CLI-ec4899?style=for-the-badge&logo=googlegemini&logoColor=ffffff" alt="Powered by Gemini 4 Argon × agy CLI" />
+  <img src="https://img.shields.io/badge/Version-v1.3.0-FBBC04?style=for-the-badge&labelColor=121317" alt="Version v1.3.0" />
+  <a href="https://antigravity.google/press" target="_blank">
+    <img src="https://img.shields.io/badge/%E2%9C%A6_Google_Antigravity-Gemini_4_Argon_%C3%97_agy_CLI-FC413D?style=for-the-badge&logo=googlegemini&logoColor=ffffff&labelColor=121317" alt="Powered by Gemini 4 Argon × Google Antigravity" />
+  </a>
   <a href="https://github.com/tw365-org/taiwan-hollow-earth-lakes/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-34d399?style=for-the-badge" alt="MIT License" />
+    <img src="https://img.shields.io/badge/License-MIT-00B95C?style=for-the-badge&labelColor=121317" alt="MIT License" />
   </a>
 </p>
 
 > **🌐 線上立即體驗 (Live Demo)**：👉 **[https://tw365-org.github.io/taiwan-hollow-earth-lakes/](https://tw365-org.github.io/taiwan-hollow-earth-lakes/)**
 >
-> **✨ 版本與開發貢獻 (`v1.2.0`)**：本專案透過 **Antigravity (`agy` CLI)** 發起，由 Google DeepMind **Gemini 4 Argon** 模型協作完成 3D 空心地球等離子引擎、全台湖泊/水庫/埤塘/潟湖與鄉鎮地理資料庫、真實官方權威連結查證及星芒藍紫漸層介面設計。
+> **✦ 版本與開發貢獻 (`v1.3.0`)**：本專案透過 **Google Antigravity (`agy` CLI)** 發起，由 Google DeepMind **Gemini 4 Argon** 模型協作完成 3D 空心地球引擎、全台湖泊/水庫/埤塘/潟湖與鄉鎮地理資料庫、真實官方權威連結查證，並嚴格對齊 **[Google Antigravity 官方媒體資源 (`antigravity.google/press`)](https://antigravity.google/press)** 之全彩 A-Wing 向量標誌、`Google Sans Flex` / `Google Sans Code` 字體與碳黑四色反重力光譜（`#121317` + `#3186FF` / `#FC413D` / `#00B95C` / `#FFE432`）。
 
 ---
 
@@ -27,14 +29,14 @@
 ---
 
 ### 2. 🌍 空心地球地心熔岩全景 × 地底領航任務模式
-切換至 **「🌍 地心全景」** 視角，仰望空心地球深處自轉發光的地心熔岩太陽與三軸磁力環；在 **「🎯 地底領航任務」** 模式中，根據鄉鎮人文線索與聲納距離雷達，駕駛潛艇搜尋目標湖泊：
+切換至 **「🌍 地心全景」** 視角，仰望空心地球深處自轉發光的 Google Antigravity 四色光譜地心太陽與四軸磁力環；在 **「🎯 地底領航任務」** 模式中，根據鄉鎮人文線索與聲納距離雷達，駕駛潛艇搜尋目標湖泊：
 
 ![空心地球地心熔岩全景與地底領航任務模式](./assets/screenshots/02-hollow-earth-mission-mode.png)
 
 ---
 
-### 3. ✨ 潛艇駕駛手冊 × Gemini 4 Argon & `agy` CLI 協作貢獻聲明 (`v1.2.0`)
-點擊頂部 **`✨ Gemini 4 Argon × agy CLI`** 徽章或右上角 **`?`** 按鈕，即可檢視完整 3D 潛艇鍵盤操控指南、三大遊戲模式說明，以及本專案由 **Google DeepMind Gemini 4 Argon × Antigravity (`agy` CLI)** 打造的架構與配色貢獻說明：
+### 3. ✦ 潛艇駕駛手冊 × Google Antigravity (`antigravity.google/press`) & Gemini 4 Argon 協作貢獻 (`v1.3.0`)
+點擊頂部 **`✦ Gemini 4 Argon × agy CLI`** 徽章或右上角 **`?`** 按鈕，即可檢視完整 3D 潛艇鍵盤操控指南、三大遊戲模式說明，以及本專案採用 **Google Antigravity 官方媒體資源 (`antigravity.google/press`)** 與 **Gemini 4 Argon** 打造的架構與配色貢獻說明：
 
 ![潛艇操作指南與 Gemini 4 Argon 開發貢獻](./assets/screenshots/03-township-quiz-challenge.png)
 

@@ -1,26 +1,27 @@
 :root {
-  --bg-abyss: #060711;
-  --glass-bg: rgba(13, 15, 34, 0.80);
-  --glass-bg-strong: rgba(10, 12, 28, 0.94);
-  --glass-border: rgba(139, 92, 246, 0.34);
-  --glass-border-bright: rgba(168, 85, 247, 0.72);
+  --bg-abyss: #121317;
+  --glass-bg: rgba(18, 19, 23, 0.86);
+  --glass-bg-strong: rgba(24, 25, 30, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-bright: rgba(49, 134, 255, 0.72);
 
-  --cyan: #60a5fa;
-  --sky: #818cf8;
-  --emerald: #34d399;
-  --amber: #f472b6;
-  --purple: #c084fc;
-  --coral: #fb7185;
-  --magma: #a855f7;
-  --gemini-grad: linear-gradient(135deg, #4b90ff 0%, #a855f7 52%, #ec4899 100%);
+  --cyan: #3186FF;
+  --sky: #749BFF;
+  --emerald: #00B95C;
+  --amber: #FFE432;
+  --purple: #749BFF;
+  --coral: #FC413D;
+  --magma: #FBBC04;
+  --gemini-grad: linear-gradient(135deg, #3186FF 0%, #FC413D 38%, #FBBC04 72%, #00B95C 100%);
+  --agy-blue-grad: linear-gradient(135deg, #1a73e8 0%, #3186FF 55%, #749BFF 100%);
 
-  --text-primary: #f8fafc;
-  --text-secondary: #a5b4fc;
-  --text-muted: #64748b;
+  --text-primary: #ffffff;
+  --text-secondary: #9aa0a6;
+  --text-muted: #5f6368;
 
-  --font-sans: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Orbitron', 'Noto Sans TC', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Google Sans Flex', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Google Sans Flex', 'Noto Sans TC', sans-serif;
+  --font-mono: 'Google Sans Code', monospace;
 }
 
 * {
@@ -56,11 +57,11 @@ body {
 }
 
 .highlight-cyan {
-  color: #60a5fa;
+  color: #749BFF;
 }
 
 .highlight-amber {
-  color: #f472b6;
+  color: #FFE432;
 }
 
 /* ==================== Top Navigation HUD ==================== */
@@ -79,7 +80,7 @@ body {
   backdrop-filter: blur(18px);
   border: 1px solid var(--glass-border);
   border-radius: 14px;
-  box-shadow: 0 12px 36px rgba(4, 5, 15, 0.7), inset 0 1px 0 rgba(192, 132, 252, 0.16);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .brand-block {
@@ -90,27 +91,30 @@ body {
 
 .brand-emblem {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #1e1e1e;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.emblem-core {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: var(--gemini-grad);
-  box-shadow: 0 0 16px #a855f7;
+.agy-press-logo {
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+  filter: drop-shadow(0 0 8px rgba(49, 134, 255, 0.45));
 }
 
 .emblem-ring {
   position: absolute;
-  inset: 2px;
-  border: 2px dashed #60a5fa;
-  border-radius: 50%;
-  animation: spinSlow 10s linear infinite;
+  inset: -2px;
+  border: 1.5px dashed rgba(116, 155, 255, 0.55);
+  border-radius: 12px;
+  animation: spinSlow 14s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes spinSlow {
@@ -123,48 +127,51 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: 9.5px;
-  letter-spacing: 1px;
-  color: #93c5fd;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: #9aa0a6;
   margin-bottom: 2px;
 }
 
 .version-pill {
   padding: 1px 6px;
   border-radius: 99px;
-  background: rgba(75, 144, 255, 0.2);
-  border: 1px solid rgba(96, 165, 250, 0.5);
-  color: #bfdbfe;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #749BFF;
   font-family: var(--font-mono);
   font-size: 9.5px;
   font-weight: 700;
 }
 
 .argon-credit-pill {
-  padding: 1px 8px;
+  padding: 1px 9px;
   border-radius: 99px;
-  background: var(--gemini-grad);
+  background: #1e1e1e;
+  border: 1px solid rgba(49, 134, 255, 0.55);
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 12px rgba(49, 134, 255, 0.3);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .argon-credit-pill:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 16px rgba(236, 72, 153, 0.75);
+  border-color: #FFE432;
+  box-shadow: 0 0 16px rgba(49, 134, 255, 0.6);
 }
 
 .brand-title {
   font-size: 16.5px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  background: linear-gradient(90deg, #ffffff 0%, #93c5fd 45%, #e879f9 100%);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  background: linear-gradient(90deg, #ffffff 0%, #749BFF 48%, #FFE432 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -173,19 +180,19 @@ body {
 .mode-tabs {
   display: flex;
   gap: 6px;
-  background: rgba(6, 7, 18, 0.72);
+  background: #1e1e1e;
   padding: 4px;
-  border-radius: 10px;
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mode-tab {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 7px 15px;
   border: none;
-  border-radius: 7px;
+  border-radius: 999px;
   background: transparent;
   color: var(--text-secondary);
   font-family: var(--font-sans);
@@ -197,13 +204,13 @@ body {
 
 .mode-tab:hover {
   color: var(--text-primary);
-  background: rgba(139, 92, 246, 0.16);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .mode-tab.active {
   color: #ffffff;
-  background: var(--gemini-grad);
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.55);
+  background: #1a73e8;
+  box-shadow: 0 0 16px rgba(49, 134, 255, 0.5);
 }
 
 /* Top Right Actions */
@@ -1340,12 +1347,12 @@ body {
   margin-top: 16px;
   padding: 14px 18px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(75, 144, 255, 0.14), rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0.14));
-  border: 1px solid rgba(168, 85, 247, 0.5);
-  box-shadow: 0 0 22px rgba(139, 92, 246, 0.18);
+  background: linear-gradient(135deg, rgba(49, 134, 255, 0.14), rgba(252, 65, 61, 0.10), rgba(0, 185, 92, 0.12), rgba(251, 188, 4, 0.12));
+  border: 1px solid rgba(49, 134, 255, 0.45);
+  box-shadow: 0 0 22px rgba(49, 134, 255, 0.16);
   font-size: 12.5px;
   line-height: 1.65;
-  color: #e2e8f0;
+  color: #e8eaed;
 }
 
 .argon-card-header {
@@ -1353,7 +1360,7 @@ body {
   align-items: center;
   gap: 7px;
   font-size: 14px;
-  color: #f0abfc;
+  color: #FFE432;
   margin-bottom: 6px;
 }
 
@@ -1368,9 +1375,9 @@ body {
 .argon-contribution-card code {
   padding: 1px 6px;
   border-radius: 4px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  color: #93c5fd;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #749BFF;
   font-family: var(--font-mono);
   font-size: 11.5px;
 }

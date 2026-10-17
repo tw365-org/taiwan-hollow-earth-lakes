@@ -6,7 +6,7 @@
   <title>地心水脈：台灣湖泊與鄉鎮 3D 地底地球探索遊戲 | TERRA-AQUA TAIWAN 3D</title>
   <meta name="description" content="3D 透視空心地球與台灣地底水脈探索小遊戲，駕駛地底探勘潛艇穿梭全台湖泊、高山湖泊、水庫、埤塘與潟湖，認識台灣各縣市鄉鎮地理與水文特色。" />
   <meta name="keywords" content="台灣湖泊, 台灣水庫, 埤塘, 潟湖, 台灣鄉鎮地理, 3D地球遊戲, Three.js, 空心地球, Hollow Earth Taiwan" />
-  <meta name="theme-color" content="#030812" />
+  <meta name="theme-color" content="#121317" />
 
   <!-- Browser Favicon & Touch Icons -->
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
@@ -19,10 +19,10 @@
   <meta property="og:description" content="駕駛地底探勘潛艇穿梭 3D 透視空心地球與台灣深層水脈，探索全台湖泊、水庫、埤塘與潟湖，認識所屬縣市鄉鎮與官方介紹。" />
   <meta property="og:image" content="https://tw365-org.github.io/taiwan-hollow-earth-lakes/assets/screenshots/01-taiwan-hollow-earth-overview.png" />
 
-  <!-- Google Fonts -->
+  <!-- Official Google Antigravity Fonts (Google Sans Flex & Google Sans Code) + Noto Sans TC -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;600;700&family=Google+Sans+Flex:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="./css/style.css" />
 
@@ -48,15 +48,28 @@
   <!-- Top HUD Navigation Bar -->
   <header class="top-hud">
     <div class="brand-block">
-      <div class="brand-emblem" title="Gemini 4 Argon × Antigravity (agy CLI)">
-        <span class="emblem-core"></span>
+      <div class="brand-emblem" title="Official Google Antigravity Mark × Gemini 4 Argon (antigravity.google/press)">
+        <svg class="agy-press-logo" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <mask id="hud_agy_mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="23" y="28" width="134" height="125">
+            <path d="M144.248 149.062C151.748 154.688 162.998 150.938 152.685 140.625C121.748 110.625 128.31 28.125 89.8727 28.125C51.4352 28.125 57.9977 110.625 27.0602 140.625C15.8102 151.875 27.9977 154.688 35.4977 149.062C64.5602 129.375 62.6852 94.6875 89.8727 94.6875C117.06 94.6875 115.185 129.375 144.248 149.062Z" fill="#3186FF"/>
+          </mask>
+          <g mask="url(#hud_agy_mask)">
+            <path d="M144.248 149.062C151.748 154.688 162.998 150.938 152.685 140.625C121.748 110.625 128.31 28.125 89.8727 28.125C51.4352 28.125 57.9977 110.625 27.0602 140.625C15.8102 151.875 27.9977 154.688 35.4977 149.062C64.5602 129.375 62.6852 94.6875 89.8727 94.6875C117.06 94.6875 115.185 129.375 144.248 149.062Z" fill="#3186FF"/>
+            <ellipse cx="98" cy="26" rx="44" ry="50" fill="#00B95C"/>
+            <ellipse cx="24" cy="40" rx="46" ry="54" fill="#FC413D"/>
+            <ellipse cx="70" cy="-2" rx="45" ry="60" fill="#FBBC04"/>
+            <ellipse cx="89" cy="153" rx="68" ry="46" fill="#749BFF"/>
+            <ellipse cx="14" cy="112" rx="34" ry="40" fill="#FC413D"/>
+            <ellipse cx="-2" cy="70" rx="46" ry="42" fill="#FFE432"/>
+          </g>
+        </svg>
         <span class="emblem-ring"></span>
       </div>
       <div class="brand-text">
         <div class="brand-subtitle">
-          <span>HOLLOW EARTH 3D</span>
-          <span class="version-pill">v1.2.0</span>
-          <span class="argon-credit-pill" id="btn-argon-badge" title="點擊查看 Gemini 4 Argon × agy CLI 開發貢獻">✨ Gemini 4 Argon × agy CLI</span>
+          <span>GOOGLE ANTIGRAVITY</span>
+          <span class="version-pill">v1.3.0</span>
+          <span class="argon-credit-pill" id="btn-argon-badge" title="點擊查看 Gemini 4 Argon × Google Antigravity Press Kit 視覺規範與開發貢獻">✦ Gemini 4 Argon × agy CLI</span>
         </div>
         <h1 class="brand-title">地心水脈：台灣湖泊鄉鎮探索號</h1>
       </div>
@@ -428,7 +441,7 @@
     <div class="modal-card help-card">
       <div class="modal-header">
         <div>
-          <span class="quiz-mode-pill">PILOT MANUAL & AI CREDITS // v1.2.0</span>
+          <span class="quiz-mode-pill">PILOT MANUAL & AI CREDITS // v1.3.0</span>
           <h2>🛸 地底探勘潛艇操作指南 & Gemini 4 Argon 開發貢獻</h2>
         </div>
         <button class="drawer-close-btn" id="btn-close-help">✕</button>
@@ -460,10 +473,10 @@
         <div class="argon-contribution-card">
           <div class="argon-card-header">
             <span class="argon-sparkle">✦</span>
-            <strong>版本 v1.2.0 — 由 Google DeepMind Gemini 4 Argon × Antigravity (agy CLI) 協作打造</strong>
+            <strong>版本 v1.3.0 — 由 Google DeepMind Gemini 4 Argon × Google Antigravity (agy CLI) 協作打造</strong>
           </div>
           <p>
-            本專案由使用者透過 <code>agy</code> (Antigravity CLI) 的 <code>/grill-me</code> 深度設計訪談工作流發起，並由 <strong>Gemini 4 Argon</strong> 模型全權負責系統架構設計、Three.js 3D 空心地球與等離子地心渲染引擎、台灣全境 36+ 座湖泊/水庫/埤塘/潟湖與鄉鎮地理資料庫整理、真實政府主管機關連結查證、Web Audio API 深海聲納合成器以及 GitHub / Cloudflare Pages 開源自動化部署。整體視覺特別採用 <strong>Gemini 4 Argon 星芒藍紫漸層 × agy CLI 極光黑曜石</strong> 主題配色。
+            本專案由使用者透過 <code>agy</code> (Antigravity CLI) 的 <code>/grill-me</code> 深度設計訪談工作流發起，並由 <strong>Gemini 4 Argon</strong> 模型全權負責系統架構設計、Three.js 3D 空心地球與地心渲染引擎、台灣全境 36+ 座湖泊/水庫/埤塘/潟湖與鄉鎮地理資料庫整理、真實政府主管機關連結查證、Web Audio API 深海聲納合成器以及 GitHub / Cloudflare Pages 開源自動化部署。整體視覺與標誌嚴格遵循 <a href="https://antigravity.google/press" target="_blank" rel="noopener noreferrer" style="color:#749BFF;text-decoration:underline;">Google Antigravity 官方媒體資源 (antigravity.google/press)</a> 規範：採用官方全彩 A-Wing 向量標誌、<code>Google Sans Flex</code> / <code>Google Sans Code</code> 字體，以及碳黑底色 (<code>#121317</code>) 搭配四色反重力光譜 (<code>#3186FF</code> / <code>#FC413D</code> / <code>#00B95C</code> / <code>#FFE432</code>)。
           </p>
         </div>
       </div>
